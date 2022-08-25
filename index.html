@@ -12,7 +12,7 @@
 <body>
     <header>
         <img src="./source/logo 1.png" alt="website logo">
-        <ion-icon name="people"></ion-icon>
+        <ion-icon name="people" onclick="displaySideBar()"></ion-icon>
     </header>
 
     <main>
@@ -32,19 +32,38 @@
     <div class="sideBar invisible">
         <div class="sideBarContent">
             <h2>Escolha um contato para enviar mensagem:</h2>
-            <ul id="onlineUsers"></ul>
+            <ion-icon name="close-circle-sharp" id="closeButton" onclick="hideSideBar()"></ion-icon>
+            <ul id="onlineUsers">
+                <li>
+                    <div class="contact">
+                        <div class="supportDiv">
+                            <ion-icon name="people-sharp"></ion-icon>
+                            <p class="sidebarText">Todos</p>
+                        </div>
+                        <ion-icon name="checkmark-sharp" class="checkMessage invisible"></ion-icon>
+                    </div>
+                </li>
+            </ul>
             <h2>Escoha a visibilidade</h2>
             <ul id="messageVisibility">
-            <li><div class="publicMessage">
-                <ion-icon name="lock-open-sharp"></ion-icon>
-                <p class="sidebarText">Publico</p>
-                <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
-            </div></li>
-            <li><div class="privateMessage">
-                <ion-icon name="lock-closed-sharp"></ion-icon>
-                <p class="sidebarText">Reservadamente</p>
-                <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
-            </div></li>
+                <li>
+                    <div class="publicMessage">
+                        <div class="supportDiv">
+                            <ion-icon name="lock-open-sharp"></ion-icon>
+                            <p class="sidebarText">Publico</p>
+                        </div>
+                        <ion-icon name="checkmark-sharp" class="checkMessage invisible"></ion-icon>
+                    </div>
+                </li>
+                <li>
+                    <div class="privateMessage">
+                        <div class="supportDiv">
+                            <ion-icon name="lock-closed-sharp"></ion-icon>
+                            <p class="sidebarText">Reservadamente</p>
+                        </div>
+                        <ion-icon name="checkmark-sharp" class="checkMessage invisible"></ion-icon>
+                    </div>
+                </li>
             </ul>
             </div>
     </div>

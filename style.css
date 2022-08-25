@@ -72,11 +72,9 @@ main > * > * {
     width: 100%;
     margin-bottom: 85px;
 }
-.hidden {
-    display: none;
-}
 .invisible {
     visibility: hidden;
+    display: none;
 }
 .loginMenu {
     position: fixed;
@@ -119,13 +117,13 @@ main > * > * {
     font-size: 18px;
 }
 
-
 .sideBar {
     position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     right: 0;
+    bottom: 0;
     z-index: 300;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
@@ -139,9 +137,43 @@ main > * > * {
 .sideBarContent h2 {
     font-size: 16px;
     font-weight: 700;
-    margin: 35px auto;
+    margin: 20px auto;
     text-align: center;
     width: 172px;
+}
+.privateMessage, .publicMessage, .contact {
+    display: flex;
+    height: 36px;
+    align-items: center;
+    margin: 0 16px;
+    justify-content: space-between;
+}
+.checkMessage {
+    color: #28BB25;
+    font-size: 18px;
+}
+.supportDiv {
+    display: flex;
+    align-items: center;
+}
+.supportDiv ion-icon {
+    margin-right: 7px;
+    font-size: 22px;
+}
+.sidebarText {
+    font-size: 16px;
+    color: #000000;
+}
+#onlineUsers {
+    max-height: 70%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+#closeButton {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    font-size: 16px;
 }
 @media (min-width: 600px) {
     header {

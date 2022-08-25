@@ -102,7 +102,8 @@ function statusUpdate() {
         promise.catch(handleError);
 
         function handleSuccess(response) {       
-        getMessages()
+        getMessages();
+        getActiveUsers();
     }
 
         function handleError(error) {
@@ -112,3 +113,43 @@ function statusUpdate() {
     }, 5000)
 }
 
+function getActiveUsers() {
+    const onlineUsers = document.querySelector('#onlineUsers');
+    const promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
+    promise.then(handleSuccess);
+    promise.catch(handleError);   
+    function handleSuccess(response) {
+        onlineUsers.innerHTML = `<li>
+    <div class="contact">
+        <div class="supportDiv">
+            <ion-icon name="people-sharp"></ion-icon>
+            <p class="sidebarText">Todos</p>
+        </div>
+        <ion-icon name="checkmark-sharp" class="checkMessage invisible"></ion-icon>
+    </div>
+</li>`
+        for (let i=0; i<response.data.length; i++) {
+            onlineUsers.innerHTML += `<li>
+            <div class="contact">
+                <div class="supportDiv">
+                    <ion-icon name="person-circle-sharp"></ion-icon>
+                    <p class="sidebarText">${response.data[i].name}</p>
+                </div>
+                <ion-icon name="checkmark-sharp" class="checkMessage invisible"></ion-icon>
+            </div>
+        </li>`
+        }
+    }
+    function handleError(error) {
+        console.log(error)
+        alert(`something went wrong!`)
+    }
+}
+
+function displaySideBar() {
+    document.querySelector('.sideBar').classList.remove('invisible');
+}
+
+function hideSideBar() {
+    document.querySelector('.sideBar').classList.add('invisible');
+}
