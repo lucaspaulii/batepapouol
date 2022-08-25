@@ -32,7 +32,25 @@ getMessages();
 
 
 function sendMessage() {
-    const message = document.querySelector('.message').innerHTML;
+    const message = document.querySelector('input').value;
+    console.log(message)
+    const messageObject = {
+        from: `${nameInput}`,
+        to: `Todos`,
+        text: `${message}`,
+        type: "message"
+    }
+    const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', messageObject);
+    promise.then(handleSuccess);
+    promise.catch(handleError);
+    function handleSuccess(response) {       
+        getMessages()
+        document.querySelector('input').value = '';
+    }
+    function handleError(error) {ss
+        console.log(error.data)
+        alert(`Faied to send the message`)
+    }
 }
 
 // function that reaches the API and GETs the messages data, then changes the html to display it
