@@ -3,7 +3,7 @@
     box-sizing: border-box;
 }
 body {
-    background-color: #E5E5E5;
+    background-color: rgb(243, 243, 243);
     font-family: 'Roboto', sans-serif;
 }
 header, footer {
@@ -42,16 +42,15 @@ footer input {
 }
 main {
     margin-top: 106px;
-    margin-bottom: 106px;
     width: 100%;
 }
 main > * {
     font-size: 14px;
     font-weight: 400;
-    width: 100%;
     border-radius: 2px;
     border-bottom: 4px;
     display: flex;
+    margin: 4px 4px;
 }
 .user-activity {
     background-color: #DCDCDC;
@@ -67,4 +66,9 @@ main > * > * {
 }
 .name {
     font-weight: 700;
+}
+.into-view {
+    height: 1px;
+    width: 100%;
+    margin-bottom: 85px;
 }
