@@ -1,9 +1,18 @@
 let nameObj
 let nameInput
+let previousMessages
+
+function enterWebsite() {
+    nameInput = document.querySelector('.loginInput input').value;
+    document.querySelector('.loginMenu').classList.add('invisible');
+    getName();
+    statusUpdate();
+}
+
 
 // function asks user's name and sends the information to the API
 function getName() {
-    nameInput = prompt(`whats your name?`);
+    //nameInput = prompt(`whats your name?`);
     nameObj = {name: nameInput};
 
     //Posting the name on the API and calling promise success and error functions
@@ -12,7 +21,7 @@ function getName() {
     promise.catch(handleError);
 
     function handleSuccess(response) {
-        console.log(response)
+        getMessages();
     }
 
     function handleError(error) {
@@ -23,17 +32,12 @@ function getName() {
             promise.catch(handleError);
         }
     }
+    
 }
-getName();
-
-
-statusUpdate();
-getMessages();
 
 
 function sendMessage() {
-    const message = document.querySelector('input').value;
-    console.log(message)
+    const message = document.querySelector('footer input').value;
     const messageObject = {
         from: `${nameInput}`,
         to: `Todos`,
@@ -45,15 +49,17 @@ function sendMessage() {
     promise.catch(handleError);
     function handleSuccess(response) {       
         getMessages()
-        document.querySelector('input').value = '';
+        document.querySelector('footer input').value = '';
     }
-    function handleError(error) {ss
-        console.log(error.data)
-        alert(`Faied to send the message`)
+    function handleError(error) {
+        alert(`Faied to send the message`);
+        window.location.reload();
     }
 }
 
 // function that reaches the API and GETs the messages data, then changes the html to display it
+
+
 function getMessages() {
     const promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     promise.then(handleSuccess);
@@ -61,6 +67,7 @@ function getMessages() {
     //document.querySelector('.into-view').scrollIntoView()
     function handleSuccess(response) {
         const htmlChanger = document.querySelector('main');
+        previousLastMessage = htmlChanger.lastChild;
         htmlChanger.innerHTML = '';
         for (let i=0; i<response.data.length; i++){            
             if(response.data[i].type === "status"){
@@ -76,13 +83,16 @@ function getMessages() {
                 </div>`
             }
         }
-        document.querySelector('.into-view').scrollIntoView();
+        if (previousLastMessage !== htmlChanger.lastChild) {
+            document.querySelector('.into-view').scrollIntoView();
+        }        
     }
 
     function handleError(error) {
         alert(`something went wrong!`)
     }
 }
+
 
 // function that updates the user status and if it succeeds calls the getMessages function to update the messages
 function statusUpdate() {

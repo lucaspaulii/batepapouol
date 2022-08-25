@@ -72,3 +72,105 @@ main > * > * {
     width: 100%;
     margin-bottom: 85px;
 }
+.hidden {
+    display: none;
+}
+.invisible {
+    visibility: hidden;
+}
+.loginMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 70%;
+}
+.loginMenu img {
+    width: 130px;
+}
+.loginMenu input {
+    width: 261px;
+    height: 54px;
+    font-size: 18px;
+    color: #AEAEAE;
+    border: solid 1px #AEAEAE;
+    border-radius: 4px;
+    text-align: center;
+}
+.loginInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.loginInput button {
+    width: 109px;
+    height: 45px;
+    color: #696969;
+    background-color: #E7E7E7;
+    border-radius: 9px;
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+
+.sideBar {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: 300;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: flex-end;
+}
+.sideBarContent {
+    width: 65%;
+    height: 100%;
+    background-color: #FFFFFF;
+}
+.sideBarContent h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 35px auto;
+    text-align: center;
+    width: 172px;
+}
+@media (min-width: 600px) {
+    header {
+        font-size: 18px;
+    }
+    header img {
+        width: 30px;
+    }
+    header{
+        height: 30px;
+    }
+    footer{
+        height: 50px;
+    }
+    footer input {
+        font-size: 12px;
+        width: 700px;
+        margin-left: 120px;
+    }
+    footer ion-icon {
+        font-size: 20px;
+        margin-right: 120px;
+    }
+    main {
+        margin: 36px auto 0 auto;
+        width: 60%;
+    }
+    .into-view {
+        margin-bottom: 52px;
+    }
+
+}

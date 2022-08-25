@@ -18,7 +18,37 @@
     <main>
 
     </main>
+
     <div class="into-view"></div>
+
+    <div class="loginMenu">
+        <img src="./source/logo 1.png" alt="website logo">
+        <div class="loginInput">
+            <input type="text" placeholder="Digite seu nome">
+            <button onclick="enterWebsite()">Entrar</button>
+        </div>
+    </div>
+
+    <div class="sideBar invisible">
+        <div class="sideBarContent">
+            <h2>Escolha um contato para enviar mensagem:</h2>
+            <ul id="onlineUsers"></ul>
+            <h2>Escoha a visibilidade</h2>
+            <ul id="messageVisibility">
+            <li><div class="publicMessage">
+                <ion-icon name="lock-open-sharp"></ion-icon>
+                <p class="sidebarText">Publico</p>
+                <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
+            </div></li>
+            <li><div class="privateMessage">
+                <ion-icon name="lock-closed-sharp"></ion-icon>
+                <p class="sidebarText">Reservadamente</p>
+                <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
+            </div></li>
+            </ul>
+            </div>
+    </div>
+
     <footer>
         <input type="text" placeholder="Escreva aqui..."><label for=""></label>
         <ion-icon name="paper-plane-outline" onclick="sendMessage()"></ion-icon>
