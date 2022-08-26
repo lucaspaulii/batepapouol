@@ -17,7 +17,6 @@ function enterWebsite() {
 
 // function asks user's name and sends the information to the API
 function getName() {
-    //nameInput = prompt(`whats your name?`);
     nameObj = {name: nameInput};
 
     //Posting the name on the API and calling promise success and error functions
@@ -93,7 +92,7 @@ function getMessages() {
                 <p class="text"><span class="name">${response.data[i].from}</span> para <span class="name">${response.data[i].to}</span>: <span class="response">${response.data[i].text}</span></p>
                 </div>`
             }
-            if(response.data[i].type === "private_message" && response.data[i].to === nameInput){
+            if(response.data[i].type === "private_message" && ((response.data[i].to === nameInput) || (response.data[i].from === nameInput))){
                 htmlChanger.innerHTML = htmlChanger.innerHTML + `<div class="private-message">
                 <p class="time">(${response.data[i].time})</p>
                 <p class="text"><span class="name">${response.data[i].from}</span> reservadamente para <span class="name">${response.data[i].to}</span>: <span class="response">${response.data[i].text}</span></p>
