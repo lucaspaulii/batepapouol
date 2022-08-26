@@ -39,7 +39,7 @@ footer input {
     font-size: 18px;
     color: #000000;
     border: none;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 main {
     margin-top: 106px;
@@ -188,18 +188,13 @@ main > * > * {
     overflow: hidden;
     word-wrap: break-word;
 }
-
-.directMessage {
-    position: fixed;
-    bottom: 0;
-    background-color: #FFFFFF;
-    left: 0;
-    width: 100%;
-    z-index: 50;
+.footerContent {
+    display: flex;
+    flex-direction: column;
 }
+
 .directMessage p {
     font-size: 14px;
-    margin: 0 0 17px 25px;
     color: #606060;
 }
 @media (min-width: 600px) {

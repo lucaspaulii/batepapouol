@@ -1,6 +1,8 @@
 let nameObj
 let nameInput
 let previousMessages
+let selectedUser = 'Todos';
+let isPrivate = 'publicamente';
 
 function enterWebsite() {
     nameInput = document.querySelector('.loginInput input').value;
@@ -90,7 +92,7 @@ function getMessages() {
                 <p class="text"><span class="name">${response.data[i].from}</span> para <span class="name">${response.data[i].to}</span>: <span class="response">${response.data[i].text}</span></p>
                 </div>`
             }
-            if(response.data[i].type === "private_message"){
+            if(response.data[i].type === "private_message" && response.data[i].to === nameInput){
                 htmlChanger.innerHTML = htmlChanger.innerHTML + `<div class="private-message">
                 <p class="time">(${response.data[i].time})</p>
                 <p class="text"><span class="name">${response.data[i].from}</span> reservadamente para <span class="name">${response.data[i].to}</span>: <span class="response">${response.data[i].text}</span></p>
@@ -98,7 +100,9 @@ function getMessages() {
             }
 
         }
-        if (previousLastMessage !== htmlChanger.lastChild) {
+        previousTime = previousLastMessage.querySelector('.time');
+        previousName = previousLastMessage.querySelector('.name');
+        if (previousTime !== htmlChanger.lastChild.querySelector('.time') && previousName !== htmlChanger.lastChild.querySelector('.name')) {
             document.querySelector('.into-view').scrollIntoView();
         }        
     }
@@ -121,8 +125,8 @@ function statusUpdate() {
     }
 
         function handleError(error) {
-        console.log(error.data)
         alert(`You are no longer active, please refresh the page and log-in again`)
+        document.location.reload(true);
     }
     }, 5000)
 }
@@ -174,8 +178,7 @@ function hideSideBar() {
     document.querySelector('.directMessage').innerHTML = `<p>Enviando para ${selectedUser} (${isPrivate})</p>`
 }
 
-let selectedUser = 'Todos';
-let isPrivate = 'publicamente';
+
 function selectUser(selected) {
     document.querySelector('.checkUser:not(.invisible)').classList.add('invisible');
     selected.querySelector('.checkUser').classList.remove('invisible');
