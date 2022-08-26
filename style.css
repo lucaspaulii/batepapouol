@@ -198,8 +198,8 @@ main > * > * {
 }
 .directMessage p {
     font-size: 14px;
-    margin: 0 0 15px 22px;
-    color: #505050;
+    margin: 0 0 17px 25px;
+    color: #606060;
 }
 @media (min-width: 600px) {
     header {
