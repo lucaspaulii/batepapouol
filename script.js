@@ -4,6 +4,7 @@ let previousMessages
 let selectedUser = 'Todos';
 let isPrivate = 'publicamente';
 
+// save the input value as the users name, hide the login area and execute all functions that are necessary to access the website for the first time
 function enterWebsite() {
     nameInput = document.querySelector('.loginInput input').value;
     document.querySelector('.loginMenu').classList.add('invisible');
@@ -13,7 +14,6 @@ function enterWebsite() {
     statusUpdate();
     activeUsersUpdate();
 }
-
 
 // function asks user's name and sends the information to the API
 function getName() {
@@ -40,7 +40,7 @@ function getName() {
     
 }
 
-
+// function that checks if the message is private or public, check the selected user and sends the message accordingly to the API
 function sendMessage() {
     const message = document.querySelector('footer input').value;
     let messageType
@@ -68,16 +68,17 @@ function sendMessage() {
     }
 }
 
-// function that reaches the API and GETs the messages data, then changes the html to display it
-
-
+// function that reaches the API and GETs the messages data, then changes the html to display it, also checks if the last message pre update has the same time and sender that the recent
+// loaded, if not it scrolls the page to the newest messages
 function getMessages() {
     const promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     promise.then(handleSuccess);
     promise.catch(handleError);
     function handleSuccess(response) {
         const htmlChanger = document.querySelector('main');
-        previousLastMessage = htmlChanger.lastChild;
+        if (htmlChanger !== "") {
+            previousLastMessage = htmlChanger.lastChild;
+        }
         htmlChanger.innerHTML = '';
         for (let i=0; i<response.data.length; i++){            
             if(response.data[i].type === "status"){
@@ -100,15 +101,19 @@ function getMessages() {
             }
 
         }
-        previousTime = previousLastMessage.querySelector('.time');
-        previousName = previousLastMessage.querySelector('.name');
-        if (previousTime !== htmlChanger.lastChild.querySelector('.time') && previousName !== htmlChanger.lastChild.querySelector('.name')) {
-            document.querySelector('.into-view').scrollIntoView();
-        }        
+        if (previousLastMessage) {
+            previousTime = previousLastMessage.querySelector('.time');
+            previousName = previousLastMessage.querySelector('.name');
+        
+            if (previousTime !== htmlChanger.lastChild.querySelector('.time') && previousName !== htmlChanger.lastChild.querySelector('.name')) {
+                document.querySelector('.into-view').scrollIntoView();
+            } 
+        }            
     }
 
     function handleError(error) {
-        alert(`something went wrong!`)
+        alert(`something went wrong!`);
+        document.location.reload(true);
     }
 }
 
@@ -130,10 +135,14 @@ function statusUpdate() {
     }
     }, 5000)
 }
+
+// loops the getActiveUsers function every 10s
 function activeUsersUpdate() {
     setInterval(getActiveUsers, 10000)
 }
 
+
+// function that reaches the API and get all the online users, then updates the sidebar html
 function getActiveUsers() {
     const onlineUsers = document.querySelector('#onlineUsers');
     const promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
@@ -163,28 +172,31 @@ function getActiveUsers() {
         }
     }
     function handleError(error) {
-        console.log(error)
-        alert(`something went wrong!`)
+        console.log(error);
+        alert(`something went wrong!`);
+        document.location.reload(true);
     }
 }
 
+// displays the sidebar when the people button is cicked
 function displaySideBar() {
     document.querySelector('.sideBar').classList.remove('invisible');
     selectedUser = 'Todos';
 }
 
+// hide the sidebar when the darker area or the close button are clicked
 function hideSideBar() {
     document.querySelector('.sideBar').classList.add('invisible');
     document.querySelector('.directMessage').innerHTML = `<p>Enviando para ${selectedUser} (${isPrivate})</p>`
 }
 
-
+// mark the selected user and save as a varuable for use in other functions
 function selectUser(selected) {
     document.querySelector('.checkUser:not(.invisible)').classList.add('invisible');
     selected.querySelector('.checkUser').classList.remove('invisible');
     selectedUser = selected.querySelector('.sidebarText').innerHTML
 }
-
+// mark the selected message type (private or public) and saves as a variable for use in other functions
 function selectPrivate(selected) {
     document.querySelector('.checkMessage:not(.invisible)').classList.add('invisible');
     selected.querySelector('.checkMessage').classList.remove('invisible');
@@ -194,6 +206,8 @@ function selectPrivate(selected) {
         isPrivate = 'publicamente';
     }
 }
+
+// refreshes the page when the logo button is clicked
 function refreshPage() {
     document.location.reload(true);
 }
