@@ -199,13 +199,20 @@ main > * > * {
 }
 @media (min-width: 600px) {
     header {
-        font-size: 18px;
+        font-size: 25px;
     }
     header img {
         width: 30px;
+        background-color: #bdbdbdbd;
+        padding: 20px 20px 20px;
+        position: fixed;
+        width: 140px;
+        top: 15px;
+        margin-top: 0;
+        cursor: pointer;
     }
     header{
-        height: 30px;
+        height: 50px;
     }
     footer{
         height: 80px;
@@ -217,9 +224,10 @@ main > * > * {
     footer ion-icon {
         font-size: 20px;
         margin-right: 120px;
+        cursor: pointer;
     }
     main {
-        margin: 36px auto 0 auto;
+        margin: 56px auto 0 auto;
         width: 60%;
     }
     .into-view {
@@ -245,16 +253,16 @@ main > * > * {
         height: 100%;
         background-color: #FFFFFF;
     }
-    header img {
-        position: fixed;
-        width: 140px;
-        top: 50px;
-    }
     header ion-icon{
         position: fixed;
+        margin-top: 0;
         right: 40px;
+        cursor: pointer;
     }
     .footerContent {
         margin-left: 120px;
+    }
+    .sideBar li {
+        cursor: pointer;
     }
 }
