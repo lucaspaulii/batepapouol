@@ -48,16 +48,16 @@
             <h2>Escoha a visibilidade</h2>
             <ul id="messageVisibility">
                 <li>
-                    <div class="publicMessage">
+                    <div class="publicMessage" onclick="selectPrivate(this)">
                         <div class="supportDiv">
                             <ion-icon name="lock-open-sharp"></ion-icon>
                             <p class="sidebarText">Publico</p>
                         </div>
-                        <ion-icon name="checkmark-sharp" class="checkMessage invisible"></ion-icon>
+                        <ion-icon name="checkmark-sharp" class="checkMessage"></ion-icon>
                     </div>
                 </li>
                 <li>
-                    <div class="privateMessage">
+                    <div class="privateMessage" onclick="selectPrivate(this)">
                         <div class="supportDiv">
                             <ion-icon name="lock-closed-sharp"></ion-icon>
                             <p class="sidebarText">Reservadamente</p>

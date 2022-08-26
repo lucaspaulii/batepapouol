@@ -41,11 +41,17 @@ function getName() {
 
 function sendMessage() {
     const message = document.querySelector('footer input').value;
+    let messageType
+    if (isPrivate === 'reservadamente') {
+        messageType = 'private_message'
+    } else {
+        messageType = 'message'
+    }
     const messageObject = {
         from: `${nameInput}`,
         to: `${selectedUser}`,
         text: `${message}`,
-        type: "message"
+        type: `${messageType}`
     }
     const promise = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', messageObject);
     promise.then(handleSuccess);
@@ -84,6 +90,13 @@ function getMessages() {
                 <p class="text"><span class="name">${response.data[i].from}</span> para <span class="name">${response.data[i].to}</span>: <span class="response">${response.data[i].text}</span></p>
                 </div>`
             }
+            if(response.data[i].type === "private_message"){
+                htmlChanger.innerHTML = htmlChanger.innerHTML + `<div class="private-message">
+                <p class="time">(${response.data[i].time})</p>
+                <p class="text"><span class="name">${response.data[i].from}</span> reservadamente para <span class="name">${response.data[i].to}</span>: <span class="response">${response.data[i].text}</span></p>
+                </div>`
+            }
+
         }
         if (previousLastMessage !== htmlChanger.lastChild) {
             document.querySelector('.into-view').scrollIntoView();
@@ -123,7 +136,7 @@ function getActiveUsers() {
     promise.then(handleSuccess);
     promise.catch(handleError);   
     function handleSuccess(response) {
-        document.querySelector('.directMessage').innerHTML = `<p>Enviando para ${selectedUser} (publicamente)</p>`
+        document.querySelector('.directMessage').innerHTML = `<p>Enviando para ${selectedUser} (${isPrivate})</p>`
         onlineUsers.innerHTML = `<li>
     <div class="contact" onclick="selectUser(this)">
         <div class="supportDiv">
@@ -158,12 +171,23 @@ function displaySideBar() {
 
 function hideSideBar() {
     document.querySelector('.sideBar').classList.add('invisible');
-    document.querySelector('.directMessage').innerHTML = `<p>Enviando para ${selectedUser} (publicamente)</p>`
+    document.querySelector('.directMessage').innerHTML = `<p>Enviando para ${selectedUser} (${isPrivate})</p>`
 }
 
 let selectedUser = 'Todos';
+let isPrivate = 'publicamente';
 function selectUser(selected) {
     document.querySelector('.checkUser:not(.invisible)').classList.add('invisible');
     selected.querySelector('.checkUser').classList.remove('invisible');
     selectedUser = selected.querySelector('.sidebarText').innerHTML
+}
+
+function selectPrivate(selected) {
+    document.querySelector('.checkMessage:not(.invisible)').classList.add('invisible');
+    selected.querySelector('.checkMessage').classList.remove('invisible');
+    if (selected.querySelector('.sidebarText').innerHTML === "Reservadamente") {
+        isPrivate = 'reservadamente';
+    } else {
+        isPrivate = 'publicamente';
+    }
 }
