@@ -6,7 +6,10 @@ function enterWebsite() {
     nameInput = document.querySelector('.loginInput input').value;
     document.querySelector('.loginMenu').classList.add('invisible');
     getName();
+    getMessages();
+    getActiveUsers();
     statusUpdate();
+    activeUsersUpdate();
 }
 
 
@@ -40,7 +43,7 @@ function sendMessage() {
     const message = document.querySelector('footer input').value;
     const messageObject = {
         from: `${nameInput}`,
-        to: `Todos`,
+        to: `${selectedUser}`,
         text: `${message}`,
         type: "message"
     }
@@ -64,7 +67,6 @@ function getMessages() {
     const promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     promise.then(handleSuccess);
     promise.catch(handleError);
-    //document.querySelector('.into-view').scrollIntoView()
     function handleSuccess(response) {
         const htmlChanger = document.querySelector('main');
         previousLastMessage = htmlChanger.lastChild;
@@ -79,7 +81,7 @@ function getMessages() {
             if(response.data[i].type === "message"){
                 htmlChanger.innerHTML = htmlChanger.innerHTML + `<div class="message">
                 <p class="time">(${response.data[i].time})</p>
-                <p class="text"><span class="name">${response.data[i].from}</span> para <span class="name">${response.data[i].to}</span>: ${response.data[i].text}</p>
+                <p class="text"><span class="name">${response.data[i].from}</span> para <span class="name">${response.data[i].to}</span>: <span class="response">${response.data[i].text}</span></p>
                 </div>`
             }
         }
@@ -103,7 +105,6 @@ function statusUpdate() {
 
         function handleSuccess(response) {       
         getMessages();
-        getActiveUsers();
     }
 
         function handleError(error) {
@@ -112,6 +113,9 @@ function statusUpdate() {
     }
     }, 5000)
 }
+function activeUsersUpdate() {
+    setInterval(getActiveUsers, 10000)
+}
 
 function getActiveUsers() {
     const onlineUsers = document.querySelector('#onlineUsers');
@@ -119,23 +123,24 @@ function getActiveUsers() {
     promise.then(handleSuccess);
     promise.catch(handleError);   
     function handleSuccess(response) {
+        document.querySelector('.directMessage').innerHTML = `<p>Enviando para ${selectedUser} (publicamente)</p>`
         onlineUsers.innerHTML = `<li>
-    <div class="contact">
+    <div class="contact" onclick="selectUser(this)">
         <div class="supportDiv">
             <ion-icon name="people-sharp"></ion-icon>
             <p class="sidebarText">Todos</p>
         </div>
-        <ion-icon name="checkmark-sharp" class="checkMessage invisible"></ion-icon>
+        <ion-icon name="checkmark-sharp" class="checkUser"></ion-icon>
     </div>
 </li>`
         for (let i=0; i<response.data.length; i++) {
             onlineUsers.innerHTML += `<li>
-            <div class="contact">
+            <div class="contact" onclick="selectUser(this)">
                 <div class="supportDiv">
                     <ion-icon name="person-circle-sharp"></ion-icon>
                     <p class="sidebarText">${response.data[i].name}</p>
                 </div>
-                <ion-icon name="checkmark-sharp" class="checkMessage invisible"></ion-icon>
+                <ion-icon name="checkmark-sharp" class="checkUser invisible"></ion-icon>
             </div>
         </li>`
         }
@@ -148,8 +153,17 @@ function getActiveUsers() {
 
 function displaySideBar() {
     document.querySelector('.sideBar').classList.remove('invisible');
+    selectedUser = 'Todos';
 }
 
 function hideSideBar() {
     document.querySelector('.sideBar').classList.add('invisible');
+    document.querySelector('.directMessage').innerHTML = `<p>Enviando para ${selectedUser} (publicamente)</p>`
+}
+
+let selectedUser = 'Todos';
+function selectUser(selected) {
+    document.querySelector('.checkUser:not(.invisible)').classList.add('invisible');
+    selected.querySelector('.checkUser').classList.remove('invisible');
+    selectedUser = selected.querySelector('.sidebarText').innerHTML
 }

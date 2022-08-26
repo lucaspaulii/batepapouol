@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./reset.css">
     <link rel="stylesheet" href="./style.css">
-    <link rel="shortcut icon" href="./source/logo 1.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./source/logo 2.png" type="image/x-icon">
     <title>BATE PAPO UOL</title>
 </head>
 <body>
@@ -30,17 +30,18 @@
     </div>
 
     <div class="sideBar invisible">
+        <div class="sideBarGap" onclick="hideSideBar()"></div>
         <div class="sideBarContent">
             <h2>Escolha um contato para enviar mensagem:</h2>
             <ion-icon name="close-circle-sharp" id="closeButton" onclick="hideSideBar()"></ion-icon>
             <ul id="onlineUsers">
                 <li>
-                    <div class="contact">
+                    <div class="contact" onclick="selectUser(this)">
                         <div class="supportDiv">
                             <ion-icon name="people-sharp"></ion-icon>
                             <p class="sidebarText">Todos</p>
                         </div>
-                        <ion-icon name="checkmark-sharp" class="checkMessage invisible"></ion-icon>
+                        <ion-icon name="checkmark-sharp" class="checkUser"></ion-icon>
                     </div>
                 </li>
             </ul>
@@ -72,6 +73,10 @@
         <input type="text" placeholder="Escreva aqui..."><label for=""></label>
         <ion-icon name="paper-plane-outline" onclick="sendMessage()"></ion-icon>
     </footer>   
+
+    <div class="directMessage">
+        <p>Enviando para Todos (publicamente)</p>
+    </div>
 
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

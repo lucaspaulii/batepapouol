@@ -39,6 +39,7 @@ footer input {
     font-size: 18px;
     color: #000000;
     border: none;
+    margin-bottom: 12px;
 }
 main {
     margin-top: 106px;
@@ -124,10 +125,17 @@ main > * > * {
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: 300;
-    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 300;  
     display: flex;
     justify-content: flex-end;
+}
+.sideBarGap {
+    position: fixed;
+    width: 35%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .sideBarContent {
     width: 65%;
@@ -165,7 +173,7 @@ main > * > * {
     color: #000000;
 }
 #onlineUsers {
-    max-height: 70%;
+    height: 65%;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -174,6 +182,24 @@ main > * > * {
     top: 8px;
     right: 8px;
     font-size: 16px;
+}
+.text {
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.directMessage {
+    position: fixed;
+    bottom: 0;
+    background-color: #FFFFFF;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+}
+.directMessage p {
+    font-size: 14px;
+    margin: 0 0 15px 22px;
+    color: #505050;
 }
 @media (min-width: 600px) {
     header {
