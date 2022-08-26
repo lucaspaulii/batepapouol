@@ -191,3 +191,6 @@ function selectPrivate(selected) {
         isPrivate = 'publicamente';
     }
 }
+function refreshPage() {
+    document.location.reload(true);
+}
