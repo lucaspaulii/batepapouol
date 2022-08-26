@@ -116,6 +116,7 @@ main > * > * {
     border-radius: 9px;
     margin-top: 15px;
     font-size: 18px;
+    border: none;
 }
 
 .sideBar {
@@ -156,7 +157,7 @@ main > * > * {
     margin: 0 16px;
     justify-content: space-between;
 }
-.checkMessage {
+.checkMessage, .checkUser {
     color: #28BB25;
     font-size: 18px;
 }
@@ -212,10 +213,10 @@ main > * > * {
         height: 30px;
     }
     footer{
-        height: 50px;
+        height: 80px;
     }
     footer input {
-        font-size: 12px;
+        font-size: 15px;
         width: 700px;
         margin-left: 120px;
     }
@@ -228,7 +229,44 @@ main > * > * {
         width: 60%;
     }
     .into-view {
-        margin-bottom: 52px;
+        margin-bottom: 82px;
     }
-
+    .loginMenu {
+        padding-bottom: 20%;
+    }
+    .directMessage {
+        position: fixed;
+        bottom: 0;
+        background-color: #FFFFFF;
+        left: 0;
+        width: 70%;
+        z-index: 50;
+    }
+    .directMessage p {
+        font-size: 12px;
+        margin: 0 0 18px 122px;
+        color: #606060;
+    }
+    .sideBarGap {
+        position: fixed;
+        width: 75%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .sideBarContent {
+        width: 25%;
+        height: 100%;
+        background-color: #FFFFFF;
+    }
+    header img {
+        position: fixed;
+        width: 140px;
+        top: 50px;
+    }
+    header ion-icon{
+        position: fixed;
+        right: 40px;
+    }
 }
