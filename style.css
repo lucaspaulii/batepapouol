@@ -191,8 +191,8 @@ main > * > * {
 .footerContent {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
-
 .directMessage p {
     font-size: 14px;
     color: #606060;
@@ -213,7 +213,6 @@ main > * > * {
     footer input {
         font-size: 15px;
         width: 700px;
-        margin-left: 120px;
     }
     footer ion-icon {
         font-size: 20px;
@@ -229,17 +228,8 @@ main > * > * {
     .loginMenu {
         padding-bottom: 20%;
     }
-    .directMessage {
-        position: fixed;
-        bottom: 0;
-        background-color: #FFFFFF;
-        left: 0;
-        width: 70%;
-        z-index: 50;
-    }
     .directMessage p {
         font-size: 12px;
-        margin: 0 0 18px 122px;
         color: #606060;
     }
     .sideBarGap {
@@ -263,5 +253,8 @@ main > * > * {
     header ion-icon{
         position: fixed;
         right: 40px;
+    }
+    .footerContent {
+        margin-left: 120px;
     }
 }
