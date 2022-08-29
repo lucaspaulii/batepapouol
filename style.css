@@ -261,6 +261,7 @@ main > * > * {
     }
     .footerContent {
         margin-left: 120px;
+        width: 300px;
     }
     .sideBar li {
         cursor: pointer;
